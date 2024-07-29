@@ -290,7 +290,7 @@ async def func(message):
 
     elif message.text == 'Активности':
         await bot.send_photo(message.chat.id, photo=open('act.jpg', 'rb'),
-                             caption='')
+                             caption='егг')
 
 
 asyncio.run(bot.polling(none_stop=True))
