@@ -19,14 +19,14 @@ async def start(message):
     btn5 = types.KeyboardButton("Прочее")
     markup.add(btn1, btn2, btn3, btn4, btn5)
     await bot.send_message(message.chat.id,
-                           f'Привет, {message.from_user.first_name}! Поздравляю тебя с поступлением в УУНиТ.'
+                           f'Привет, {message.from_user.first_name} ! Поздравляю тебя с поступлением в УУНиТ.'
                            '\n Бот содержит в себе ответы на частые вопросы от абитуриентов и может послужить тебе '
                            'небольшим справочником'
-                           ''
-                           '\n Если ты не нашел ответа на свой вопрос, то можешь обратиться к админу @Dantekageshad.'
-                           '\n !!! БОТ СОЗДАН СТУДЕНТОМ УГАТУ, НЕКОТОРЫЕ МОМЕНТЫ МОГУТ ОТЛИЧАТЬСЯ ДЛЯ АБИТУРИЕНТОВ '
-                           'БЫВШЕГО БГУ, ПРОСИМ ОТНЕСТИСЬ С ПОНИМАНИЕМ (СОЗДАНО ДЛЯ СТУДЕНТОВ ГОЛОВНОГО ВУЗА '
-                           'БАКАЛАВРИАТА/СПЕЦИАЛИТЕТА ОЧНОЙ ФОРМЫ ОБУЧЕНИЯ)', reply_markup=markup)
+                           '\n\n Если ты не нашел ответа на свой вопрос, то можешь обратиться к админу @Dantekageshad.'
+                           '\n\n \U00002757\U00002757\U00002757 Бот является студенческой инициативой и носит '
+                           'ознакомительный характер\U00002757\U00002757\U00002757'
+                           '\n (СОЗДАНО ДЛЯ СТУДЕНТОВ ГОЛОВНОГО ВУЗА БАКАЛАВРИАТА/СПЕЦИАЛИТЕТА ОЧНОЙ ФОРМЫ ОБУЧЕНИЯ)',
+                           reply_markup=markup)
 
 
 @bot.message_handler(content_types=['text'])
@@ -95,10 +95,10 @@ async def func(message):
                              caption='Материальная помощь — это единовременная выплата, по различным социальным '
                                      'причинам. '
                                      '\n\nПолучать её могут и бюджетники, и платники, если они состоят в Профсоюзе. '
-                                     'Для этого следует лишь собрать документы и принести их в профкомя (не забудьте '
+                                     'Для этого следует лишь собрать документы и принести их в профком (не забудьте '
                                      'профсоюзный билет) не позднее 28 числа каждого месяца (может быть раньше в связи'
                                      ' с праздниками/выходными), сама выплата приходит в следующем месяце'
-                                     '\n\nСписок причин и документов для офрмления приведён ниже')
+                                     '\n\nСписок причин и документов для оформления приведён ниже')
         await bot.send_document(message.chat.id, document=open('Причины матпомощи.pdf', 'rb'))
 
     elif message.text == "Учёба":
@@ -154,7 +154,8 @@ async def func(message):
                                      '\n\n Так вот. Учебный план - это непонятный файл с тем, что вы будете изучать, '
                                      'когда и в каком объёме. В файле ниже вы можете найти план для своего профиля '
                                      'специальности')
-        await bot.send_document(message.chat.id, document=open('table_plans.xlsx', 'rb'))
+        await bot.send_document(message.chat.id, document=open('plans.xlsx', 'rb'))
+        await bot.send_document(message.chat.id, document=open('Как читать учебные планы.pdf', 'rb'))
 
     elif message.text == "Прочее":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -225,13 +226,13 @@ async def func(message):
 
     elif message.text == "Шаг 1":
         await bot.send_photo(message.chat.id, photo=open('plasw.jpg', 'rb'),
-                             caption='Шаг 1. Подать заявление на предоставление койко-места, а не то будете спать на '
-                                     'улице!')
+                             caption='Шаг 1. Подать заявление на предоставление койко-места до 15.08')
+        await bot.send_document(message.chat.id, document=open('zayavl-zaseleniye.docx', 'rb'))
 
     elif message.text == "Шаг 2":
         await bot.send_document(message.chat.id,
                                 document=open('Инструкция для подачи заявления на общежитие.pdf', 'rb'),
-                                caption='Шаг 2. Подаём заявление в ИСУ'
+                                caption='Шаг 2. Подаём заявление в ИСУ(если вам предоставили место) до 23.08'
                                         '\n\nКак получить доступ в ИСУ? Смотреть во вкладке Прочее')
 
     elif message.text == "Шаг 3":
@@ -263,8 +264,8 @@ async def func(message):
                 media.append(InputMediaPhoto(open(photo_path, 'rb')))
         if media:
             await bot.send_media_group(message.chat.id, media=media)
-        await bot.send_message(message.chat.id, 'Шаг 5. Закрепляем чеки, показывая что мы честные люди, сами '
-                                                'чеки относим коменданту ')
+        await bot.send_message(message.chat.id, 'Шаг 5. Закрепляем чеки до 15.09, показывая что мы честные люди, '
+                                                'сами чеки относим коменданту (если требуется) ')
 
     elif message.text == "Вернуться":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -290,7 +291,21 @@ async def func(message):
 
     elif message.text == 'Активности':
         await bot.send_photo(message.chat.id, photo=open('act.jpg', 'rb'),
-                             caption='егг')
+                             caption='Студенческие активности: спортивные и творческие'
+                                     '\n\nhttps://vk.com/uust_youth - в группе Управления по молодёжной политике вы '
+                                     'найдёте информацию о мероприятиях, форумах, грантовых конкурсах, также проводятся'
+                                     ' розыгрыши билетов на культурные мероприятия. '
+                                     'В контактах группы можете найти множество студенческих объединений разной '
+                                     'направленности'
+                                     '\n\n Чтобы узнать больше про мероприятия в университете и о Профкоме, рекомендуем'
+                                     ' к ознакомлению документ ниже ')
+        await bot.send_document(message.chat.id, document=open('Gid_pervokursnika_Profkoma.pdf', 'rb'))
+        await bot.send_photo(message.chat.id, photo=open('спорт.jpg', 'rb'),
+                             caption='https://vk.com/sportusatu - группа кафедры физического воспитания. '
+                                     'Освещаюстя спортивные события, наборы в сборные и секции '
+                                     '\n\nhttps://vk.com/uustesports - сектор киберспорта'
+                                     '\nУведомления о наборах в сборные/секции будут опубликованы в группах, следите за'
+                                     ' обновлениями')
 
 
 asyncio.run(bot.polling(none_stop=True))
